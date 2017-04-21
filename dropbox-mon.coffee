@@ -1,4 +1,4 @@
-command: "ps -ef | grep 'Dropbox.app/Contents/MacOS/Dropbox' &> /dev/null || echo Dropbox is Down"
+command: "ps -ef | pgrep Dropbox &> /dev/null || echo Dropbox is Down"
 
 refreshFrequency: 60000 # ms
 

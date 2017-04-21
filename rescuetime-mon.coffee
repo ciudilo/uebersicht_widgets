@@ -1,4 +1,4 @@
-command: "ps -ef | grep 'RescueTime$' &> /dev/null || echo RescueTime is Down"
+command: "ps -ef | pgrep RescueTime &> /dev/null || echo RescueTime is Down"
 
 refreshFrequency: 60000 # ms
 

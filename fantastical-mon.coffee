@@ -1,4 +1,4 @@
-command: "ps -ef | grep 'Fantastical 2' &> /dev/null || echo Fantastical is Down"
+command: "ps -ef | pgrep 'Fantastical 2' &> /dev/null || echo Fantastical is Down"
 
 refreshFrequency: 60000 # ms
 

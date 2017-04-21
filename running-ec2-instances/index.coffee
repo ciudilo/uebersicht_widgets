@@ -1,12 +1,4 @@
-command: "query='Reservations[*].Instances[].{ \
-  InstanceId:InstanceId,
-  ImageId:ImageId,
-  InstanceType:InstanceType,
-  LaunchTime:LaunchTime,
-  AZ:Placement.AvailabilityZone,
-  State:State.Name,
-  IP:PublicIpAddress,
-  Name:Tags[?Key==\'Name\'].Value[]}';
+command: "query=\"Reservations[*].Instances[].{InstanceId:InstanceId,ImageId:ImageId,InstanceType:InstanceType,LaunchTime:LaunchTime,AZ:Placement.AvailabilityZone,State:State.Name,IP:PublicIpAddress,Name:Tags[?Key=='Name'].Value[]}\";
 
 obj1=[];
 obj2=[];
@@ -15,14 +7,14 @@ for region in `/usr/local/bin/aws ec2 describe-regions --output text | cut -f3 |
 do
   obj1_tmp=`/usr/local/bin/aws ec2 describe-instances \
   --filters Name=key-name,Values=KirilPiskunov \
-  --query  \"$query\" \
+  --query  $query \
   --output json --region $region`; \
 
   obj1=$(echo $obj1 $obj1_tmp | /usr/local/bin/jq -s add);
 
   obj2_tmp=`/usr/local/bin/aws ec2 describe-instances \
   --filters Name=tag:owner,Values=kiril.piskunov \
-  --query \"$query\" \
+  --query $query \
   --output json --region $region`; \
 
   obj2=$(echo $obj2 $obj2_tmp | /usr/local/bin/jq -s add);

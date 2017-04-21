@@ -105,11 +105,13 @@ renderTable: (data) ->
       $tableBody.append @renderRow(key, value)
 
 renderRow: (key, value) ->
+  isArray = Array.isArray or (obj) -> toString.call(obj) == '[object Array]'
+  name = if isArray value.Name then value.name[0] else ""
   return """<tr>
               <td>#{value.AZ}</td>
               <td>#{value.IP}</td>
               <td>#{value.InstanceType}</td>
-              <td>#{value.Name[0]}</a></td>
+              <td>#{name}</a></td>
               <td>#{value.LaunchTime}</td>
               <td>#{value.State}</td>
             </tr>"""

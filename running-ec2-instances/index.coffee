@@ -98,7 +98,7 @@ renderTable: (data) ->
 
 renderRow: (key, value) ->
   isArray = Array.isArray or (obj) -> toString.call(obj) == '[object Array]'
-  name = if isArray value.Name then value.name[0] else ""
+  name = if isArray value.Name then value.Name[0] else ""
   return """<tr>
               <td>#{value.AZ}</td>
               <td>#{value.IP}</td>
